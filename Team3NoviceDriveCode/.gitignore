@@ -15,3 +15,6 @@ temp.log
 temp.errors
 *.ini
 .d/
+
+# PROS header left out of the repo
+include/pros/screen.hpp

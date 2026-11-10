@@ -2,7 +2,6 @@
 #include "drivecode/objects.hpp"
 #include "drivecode/intake.hpp"
 #include "drivecode/arm.hpp"
-#include "drivecode/screen.hpp"
 
 #include <cstdlib>
 
@@ -22,20 +21,6 @@ void initialize() {
     chassis.setBrakeMode(pros::E_MOTOR_BRAKE_BRAKE);
     setupIntake();
     setupArm();
-    startScreen();
-
-    // The controller screen needs a short pause between commands.
-    pros::delay(100);
-    int missing = missingMotors();
-    controller.clear();
-    pros::delay(100);
-    if (missing > 0) {
-        controller.print(0, 0, "%d MOTOR(S) MISSING", missing);
-        pros::delay(100);
-        controller.rumble("---");
-    } else {
-        controller.print(0, 0, "Ready");
-    }
 }
 
 void disabled() {}
@@ -48,6 +33,7 @@ void opcontrol() {
     const int start = pros::millis();
     bool warned15 = false;
     bool warned5 = false;
+    bool slowMode = false;
 
     while (true) {
         int throttle = stick(controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y));
