@@ -15,10 +15,10 @@ void setupArm() {
 // runs over and over in opcontrol
 // X = up, B = down
 void updateArm() {
-	if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
+	if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
 		arm.move(100); // go up
 	}
-	else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) {
+	else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
 		arm.move(-100); // go down
 	}
 	else {
